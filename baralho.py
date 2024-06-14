@@ -10,7 +10,7 @@ class Baralho:
     def __init__(self):
         naipes = ['Espadas', 'Copas', 'Paus', 'Ouros']
         valores = {
-            'A': 1,
+            'Ás': 1,
             '2': 2,
             '3': 3,
             '4': 4,
@@ -20,14 +20,17 @@ class Baralho:
             '8': 8,
             '9': 9,
             '10': 10,
-            'J': 10,
-            'Q': 10,
-            'K': 10
+            'Valete': 10,
+            'Dama': 10,
+            'Rei': 10
         }
         self.cartas = []
         for naipe in naipes:
             for valor in valores:
-                self.cartas.append(Carta(valor, valores[valor], naipe))
+                nome_carta = f'{valor} de {naipe}'
+                valor_carta = valores[valor]
+                carta = Carta(nome_carta, valor_carta, naipe)
+                self.cartas.append(carta)
 
     def embaralhar(self):
         random.shuffle(self.cartas)
@@ -42,5 +45,5 @@ class Baralho:
         else:
             cartas_distribuidas = []
             for i in range(quantidade):
-                cartas_distribuidas.append(self.cartas.pop())
+                cartas_distribuidas.append(self.cartas.pop(0))
             return cartas_distribuidas

@@ -43,6 +43,19 @@ def regras():
     print("Boa sorte!")
     print()
 
+def calcular_total(cartas):
+    total = 0
+    for carta in cartas:
+        total += carta.valor
+    return total
+
+def exibir_cartas(cartas):
+    for carta in cartas:
+        print(f"- {carta.nome}")
+    total = calcular_total(cartas)
+    print(f"Total: {total}")
+    print()
+
 def iniciar_jogo():
     bem_vindo()
     baralho = Baralho()
@@ -50,5 +63,18 @@ def iniciar_jogo():
 
     cartas_jogador = baralho.distribuir_cartas(2)
     cartas_oponente = baralho.distribuir_cartas(2)
+
+    print()
+    print("Suas cartas:")
+    exibir_cartas(cartas_jogador)
+    print("As cartas do oponente:")
+    exibir_cartas(cartas_oponente)
+    print()
+
+    opcao = input("""Deseja comprar mais uma carta?
+                  1. Sim
+                  2. Não
+                  Digite a opção desejada: """)
+
 
 iniciar_jogo()
