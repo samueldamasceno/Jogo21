@@ -71,10 +71,27 @@ def iniciar_jogo():
     exibir_cartas(cartas_oponente)
     print()
 
-    opcao = input("""Deseja comprar mais uma carta?
-                  1. Sim
-                  2. Não
-                  Digite a opção desejada: """)
+    while True:
+        opcao = input("""Deseja comprar mais uma carta?
+                      1. Sim
+                      2. Não
+                      Digite a opção desejada: """)
+        
+        if opcao == "1":
+            carta_nova = baralho.distribuir_cartas(1)[0]
+            cartas_jogador.append(carta_nova)
+            print(f"Você comprou: {carta_nova.nome}")
+            print("Suas cartas agora:")
+            exibir_cartas(cartas_jogador)
+            if calcular_total(cartas_jogador) > 21:
+                print("Você passou de 21!")
+                break
+        elif opcao == "2":
+            print()
+            print("  ")
+            break
+        else:
+            print("Opção inválida!")
 
 
 iniciar_jogo()
