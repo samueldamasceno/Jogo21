@@ -3,6 +3,8 @@
 import random
 import os
 
+from baralho import Baralho
+
 def bem_vindo():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("Bem-vindo ao jogo de 21!")
@@ -39,9 +41,14 @@ def regras():
         8. Se as duas mãos forem iguais, você perde.""")
     print()
     print("Boa sorte!")
+    print()
 
 def iniciar_jogo():
     bem_vindo()
+    baralho = Baralho()
+    baralho.embaralhar()
 
+    cartas_jogador = baralho.distribuir_cartas(2)
+    cartas_oponente = baralho.distribuir_cartas(2)
 
 iniciar_jogo()
