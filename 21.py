@@ -1,6 +1,4 @@
 # jogo de 21 no terminal em python
-
-import random
 import os
 
 from baralho import Baralho
@@ -56,6 +54,40 @@ def exibir_cartas(cartas):
     print(f"Total: {total}")
     print()
 
+def calcular_resultado(cartas_jogador, cartas_oponente):
+    total_jogador = calcular_total(cartas_jogador)
+    total_oponente = calcular_total(cartas_oponente)
+    if total_jogador > 21:
+        derrota()
+        return
+    elif total_oponente > 21:
+        vitoria()
+        return
+    elif total_jogador > total_oponente:
+        vitoria()
+        return
+    elif total_jogador < total_oponente:
+        derrota()
+        return
+    elif total_jogador == total_oponente:
+        empate()
+        return
+    
+def derrota():
+    print()
+    print("Você perdeu!")
+    print()
+
+def vitoria():
+    print()
+    print("Você ganhou!")
+    print()
+
+def empate():
+    print()
+    print("Empate!")
+    print()
+
 def iniciar_jogo():
     bem_vindo()
     baralho = Baralho()
@@ -67,8 +99,7 @@ def iniciar_jogo():
     print()
     print("Suas cartas:")
     exibir_cartas(cartas_jogador)
-    print("As cartas do oponente:")
-    exibir_cartas(cartas_oponente)
+    print("As cartas do oponente estão viradas por enquanto")
     print()
 
     while True:
@@ -88,10 +119,29 @@ def iniciar_jogo():
                 break
         elif opcao == "2":
             print()
-            print("  ")
+            print("Vamos calcular os pontos finais...")
             break
         else:
             print("Opção inválida!")
 
+    print()
+    print("As cartas do oponente:")
+    exibir_cartas(cartas_oponente)
+    
+    calcular_resultado(cartas_jogador, cartas_oponente)
 
-iniciar_jogo()
+while True:
+    iniciar_jogo()
+    print()
+    print("""Deseja jogar novamente?
+          1. Sim
+          2. Não""")
+    opcao = input()
+    if opcao == "1":
+        print()
+        os.system('cls' if os.name == 'nt' else 'clear')
+    elif opcao == "2":
+        print()
+        print("Até a próxima!")
+        break
+
