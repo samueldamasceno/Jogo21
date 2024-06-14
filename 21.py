@@ -1,6 +1,5 @@
 # jogo de 21 no terminal em python
 import os
-
 from baralho import Baralho
 
 def bem_vindo():
@@ -120,6 +119,7 @@ def iniciar_jogo():
             exibir_cartas(cartas_jogador)
             if calcular_total(cartas_jogador) > 21:
                 print("Você passou de 21!")
+                derrota()
                 break
         elif opcao == "2":
             print()
@@ -127,16 +127,17 @@ def iniciar_jogo():
         else:
             print("Opção inválida!")
 
-    print("Agora é a vez do oponente")
-    while calcular_total(cartas_oponente) < 17:
-        carta_nova = baralho.distribuir_cartas(1)[0]
-        cartas_oponente.append(carta_nova)
-        print(f"O oponente comprou: {carta_nova.nome}")
-        exibir_cartas(cartas_oponente)
-     
-    print("O oponente decidiu parar de comprar.")
+    if calcular_total(cartas_jogador) < 21:
+        print("Agora é a vez do oponente")
+        while calcular_total(cartas_oponente) < 17:
+            carta_nova = baralho.distribuir_cartas(1)[0]
+            cartas_oponente.append(carta_nova)
+            print(f"O oponente comprou: {carta_nova.nome}")
+            exibir_cartas(cartas_oponente)
+        
+        print("O oponente decidiu parar de comprar.")
 
-    calcular_resultado(cartas_jogador, cartas_oponente)
+        calcular_resultado(cartas_jogador, cartas_oponente)
 
 while True:
     iniciar_jogo()
@@ -152,4 +153,3 @@ while True:
         print()
         print("Até a próxima!")
         break
-
