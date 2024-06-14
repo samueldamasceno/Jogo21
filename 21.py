@@ -57,6 +57,10 @@ def exibir_cartas(cartas):
 def calcular_resultado(cartas_jogador, cartas_oponente):
     total_jogador = calcular_total(cartas_jogador)
     total_oponente = calcular_total(cartas_oponente)
+
+    print("Você: " + str(total_jogador))
+    print("Oponente: " + str(total_oponente))
+
     if total_jogador > 21:
         derrota()
         return
@@ -119,15 +123,19 @@ def iniciar_jogo():
                 break
         elif opcao == "2":
             print()
-            print("Vamos calcular os pontos finais...")
             break
         else:
             print("Opção inválida!")
 
-    print()
-    print("As cartas do oponente:")
-    exibir_cartas(cartas_oponente)
-    
+    print("Agora é a vez do oponente")
+    while calcular_total(cartas_oponente) < 17:
+        carta_nova = baralho.distribuir_cartas(1)[0]
+        cartas_oponente.append(carta_nova)
+        print(f"O oponente comprou: {carta_nova.nome}")
+        exibir_cartas(cartas_oponente)
+     
+    print("O oponente decidiu parar de comprar.")
+
     calcular_resultado(cartas_jogador, cartas_oponente)
 
 while True:
